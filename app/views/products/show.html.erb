@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @product %>
+
+<div>
+  <%= link_to "Back to products", products_path, class:"btn btn-secondary my-2" %>
+</div>
+
+<div class="border container-fluid p-2 p-md-4">
+  <h5>Comments</h5>
+  <div id="btn_add_comment">
+    <%= button_to "Add a comment", new_comment_path(product_id: @product), class:"btn btn-primary", method: :post%>
+  </div>
+
+  <div id="comments">
+    <% @product.comments.reverse_each do |comment|%>
+      <%= render comment %>
+    <% end %>
+  </div>
+</div>
