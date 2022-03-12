@@ -1,24 +1,26 @@
 
   <div class="col" id="<%= dom_id rental %>">
     <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= rental.product.title %></h5>
-        <p class="card-text"><%= rental.product.content %></p>
-        <p class="card.text">Rental start: <%= rental.start_date %></p>
-        <p class="card.text">Rental end: <%= rental.start_date %></p>
-        <% if rental.user == current_user and rental.active? %>
-          <%= button_to rental_done_path(rental), method: :post, hidden:true do%>
-            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" id="btn_modal">
-              Mark this rental as done
-            </button>
+      <%= link_to rental.product, class:"no-link" do %>
+        <div class="card-body">
+          <h5 class="card-title"><%= rental.product.title %></h5>
+          <p class="card-text"><%= link_to rental.product.user.full_name, profile_path(rental.product.user), class:"no-link" %></p>
+          <p class="card.text">Rental start: <%= rental.start_date %></p>
+          <p class="card.text">Rental end: <%= rental.start_date %></p>
+          <% if rental.user == current_user and rental.active? %>
+            <%= button_to rental_done_path(rental), method: :post, hidden:true do%>
+              <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" id="btn_modal">
+                Mark this rental as done
+              </button>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <% if rental.done? %>
-          <p class="text-muted">Marked as done <%= time_ago_in_words rental.updated_at %> ago</p>
-        <% end %>
+          <% if rental.done? %>
+            <p class="text-muted">Marked as done <%= time_ago_in_words rental.updated_at %> ago</p>
+          <% end %>
 
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 

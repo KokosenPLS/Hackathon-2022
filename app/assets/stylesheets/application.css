@@ -43,3 +43,8 @@
     color: black;
 }
 
+.no-link:hover {
+    text-decoration: none;
+    color: black;
+}
+

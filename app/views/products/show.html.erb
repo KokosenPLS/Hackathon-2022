@@ -16,5 +16,9 @@
     <% @product.comments.reverse_each do |comment|%>
       <%= render comment %>
     <% end %>
+
+    <% if @product.comments.count == 0%>
+      <h6>This listing has no comments yet</h6>
+    <% end %>
   </div>
 </div>

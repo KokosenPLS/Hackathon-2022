@@ -22,6 +22,11 @@
   </div>
 
   <div>
+    <%= form.label "Price per day ($)", style: "display: block", class:"mt-4" %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div>
     <%= form.number_field :user_id, id: :story_user_id, value: current_user.id, type: :hidden %>
   </div>
 

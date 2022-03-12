@@ -30,6 +30,7 @@
         <h5 class="card-title"><%= product.title %></h5>
         <p class="card-subtitle text-muted mt-3" hidden>This listing is currently being rented</p>
         <h6 class="card-subtitle mt-3"><%= product.address %></h6>
+        <p class="card-subtitle text-muted mt-3">Costs $<%= product.price %> a day</p>
         <p class="card-text mt-3"><%= product.content %></p>
         <p class="card-text mt-3">Listed by <%= link_to product.user.first_name + " " + product.user.last_name, profile_path(product.user) %></p>
       </div>
