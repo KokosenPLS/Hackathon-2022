@@ -7,8 +7,11 @@
         <p class="card.text">Rental start: <%= rental.start_date %></p>
         <p class="card.text">Rental end: <%= rental.start_date %></p>
         <% if rental.user == current_user and rental.active? %>
-          <%= button_to "Mark this rental as done", rental_done_path(rental), method: :post , class:"btn btn-success"%>
-
+          <%= button_to rental_done_path(rental), method: :post, hidden:true do%>
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" id="btn_modal">
+              Mark this rental as done
+            </button>
+          <% end %>
         <% end %>
 
         <% if rental.done? %>

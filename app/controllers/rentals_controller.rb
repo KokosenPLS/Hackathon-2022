@@ -70,7 +70,10 @@ class RentalsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove(@rental),
-          turbo_stream.prepend("done-rentals", @rental)
+          turbo_stream.prepend("done-rentals", @rental),
+          turbo_stream.update("active-count", partial:"rentals/active_rentals_counter", locals:{active: @rental.user.rentals.where(status: :active)}),
+          turbo_stream.update("done-count", partial:"rentals/done_rentals_counter", locals:{done: @rental.user.rentals.where(status: :done)}),
+          turbo_stream.update("modal-body", partial: "rentals/rate_rental", locals:{rental: @rental})
         ]
       end
     end

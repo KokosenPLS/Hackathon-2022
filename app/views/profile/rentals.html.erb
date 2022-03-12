@@ -1,7 +1,7 @@
 <div class="my-3">
   <% active = @user.rentals.where(status: :active) %>
-  <h4><%= pluralize(active.count, 'active rental') %></h4>
-  <% if active.count > 1 %>
+  <h4 id="active-count"><%= pluralize(active.count, 'active rental') %></h4>
+  <% if active.count > 0 %>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="active-rentals">
     <% active.reverse_each do |rental| %>
 
@@ -13,10 +13,12 @@
 
 </div>
 
+<br>
+
 <div class="my-3">
   <% done = @user.rentals.where(status: :done) %>
   <% if done.count > 0 %>
-    <h4><%= pluralize(done.count, 'finished rental') %></h4>
+    <h4 id="done-count"><%= pluralize(done.count, 'finished rental') %></h4>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="done-rentals">
       <% done.reverse_each do |rental| %>
         <%= render rental %>

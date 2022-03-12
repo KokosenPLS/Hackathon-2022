@@ -1,43 +1,64 @@
-<h2><%= @user.first_name + " " + @user.last_name %></h2>
 
-<% if @user.products.count > 0 %>
-<div class="profile-listings">
-  <h5>Has <%= pluralize(@user.products.count, 'listing') %></h5>
-  <div class="row row-cols-1 row-cols-md-2 g-4" id="listings">
-    <% @user.products.reverse_each do |product| %>
-    <%=  render "products/profile_product", product: product %>
+<div class="row mt-4">
+  <div class="col col-md-8">
+    <% if @user.products.count > 0 %>
+      <div class="profile-listings">
+        <h5>Listings</h5>
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="listings">
+          <% @user.products.reverse_each do |product| %>
+            <%=  render "products/profile_product", product: product %>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <h3 class="my-4"><%= @user.full_name %> has no listings yet...</h3>
     <% end %>
   </div>
-</div>
-<% end %>
+  <div class="col col-md-4">
+    <h3 class="mt-4"><%= @user.first_name  + " " + @user.last_name%></h3>
+    <h5 class="mt-4"><%= @user.email %></h5>
+    <p class="mt-4">Phone: <%= @user.phone_number %></p>
+    <p class="mt-4">Address: <%= @user.address %></p>
+    <p class="mt-4">Currently has <%= pluralize(@user.products.count, 'listing') %></p>
 
-<hr class="my-5">
+    <% if current_user == @user %>
+      <%= link_to "Endre konto instillinger", edit_user_registration_path, method: :get, class: "btn btn-secondary"%>
+    <% end %>
+  </div>
+  <div class="row">
 
-<div class="m-2">
-  <% active = @user.rentals.where(status: :active) %>
-  <% done = @user.rentals.where(status: :done) %>
-  <% if active.count > 0 %>
-    <div class="rounded-2 border p-4 mt-4">
-      <h5>Has <%= pluralize(active.count, 'active rental') %></h5>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <% active.reverse_each do |rental| %>
-          <%=  render "rentals/rental", rental: rental %>
-        <% end %>
-      </div>
+    <hr class="my-5">
+    <div class="m-2">
+      <% active = @user.rentals.where(status: :active) %>
+      <% done = @user.rentals.where(status: :done) %>
+      <% if active.count > 0 %>
+        <div class="p-4 mt-4">
+          <h5 id="active-count">Has <%= pluralize(active.count, 'active rental') %></h5>
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            <% active.reverse_each do |rental| %>
+              <%=  render "rentals/rental", rental: rental %>
+            <% end %>
+          </div>
+        </div>
+
+        <hr class="my-5">
+      <% end %>
+
+
+      <% if done.count > 0 %>
+        <div class="p-4 mt-4">
+          <h5 id="done-count">Has <%= pluralize(done.count, 'done rental') %></h5>
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            <% done.reverse_each do |rental| %>
+              <%=  render "rentals/rental", rental: rental %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <% if done.count > 0 %>
-    <div class="rounded-2 border p-4 mt-4">
-      <h5>Has <%= pluralize(done.count, 'done rental') %></h5>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <% done.reverse_each do |rental| %>
-          <%=  render "rentals/rental", rental: rental %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 </div>
+
 
 <% if current_user == @user %>
   <script type="text/javascript" charset="utf-8">

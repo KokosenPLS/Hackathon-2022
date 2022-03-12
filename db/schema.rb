@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_12_074648) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_12_124420) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -59,6 +59,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_074648) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "dislikes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "rental_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_id"], name: "index_dislikes_on_rental_id"
+    t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "rental_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_id"], name: "index_likes_on_rental_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -93,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_074648) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -101,6 +120,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_074648) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "dislikes", "rentals"
+  add_foreign_key "dislikes", "users"
+  add_foreign_key "likes", "rentals"
+  add_foreign_key "likes", "users"
   add_foreign_key "products", "users"
   add_foreign_key "rentals", "products"
   add_foreign_key "rentals", "users"

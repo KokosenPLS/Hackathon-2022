@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   protected
 
   public def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :phone_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :phone_number, :address])
   end
 
-  def authenticate_user!
-    redirect_to new_user_session_path, notice: "You must login" unless user_signed_in?
-  end
+  #def authenticate_user!
+  #  redirect_to new_user_session_path, notice: "You must login" unless user_signed_in?
+  #end
 
 end

@@ -7,5 +7,11 @@ class User < ApplicationRecord
   has_many :comments
   has_many :products
   has_many :rentals
+  has_many :likes
+  has_many :dislikes
+
+  def full_name
+    first_name + " " + last_name
+  end
 
 end
