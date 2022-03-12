@@ -1,0 +1,15 @@
+<div class="col">
+  <div class="card">
+    <%= link_to product, class:"no-link" do %>
+      <div class="d-flex justify-content-center w-100 bg-white">
+        <%= image_tag product.image, class:"w-50 card-img-top"%>
+      </div>
+
+
+    <div class="card-body border-top">
+      <h5 class="card-title" style="text-decoration: none"><%= product.title %></h5>
+      <p class="card-text" style="text-decoration: none; color:black"><%= product.content %></p>
+    </div>
+    <% end %>
+  </div>
+</div>

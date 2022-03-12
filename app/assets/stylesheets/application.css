@@ -28,3 +28,18 @@
 .display-product > p {
     margin-top: 1rem;
 }
+
+.profile-listings .card:hover {
+    background-color: #CCCCCC;
+}
+
+.profile-listings .card {
+    transition: background-color 200ms ease-out 10ms;
+}
+
+
+.no-link{
+    text-decoration: none;
+    color: black;
+}
+

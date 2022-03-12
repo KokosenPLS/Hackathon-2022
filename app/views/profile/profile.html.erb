@@ -1,39 +1,43 @@
 <h2><%= @user.first_name + " " + @user.last_name %></h2>
 
 <% if @user.products.count > 0 %>
-<div class="rounded-2 border p-4 mt-4">
+<div class="profile-listings">
   <h5>Has <%= pluralize(@user.products.count, 'listing') %></h5>
-  <div class="row">
+  <div class="row row-cols-1 row-cols-md-2 g-4" id="listings">
     <% @user.products.reverse_each do |product| %>
-    <div class="col col-md-6 col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= product.title %></h5>
-          <p class="card-text"><%= product.content %></p>
-        </div>
-      </div>
-    </div>
+    <%=  render "products/profile_product", product: product %>
     <% end %>
   </div>
 </div>
 <% end %>
 
-<% if @user.rentals.count > 0 %>
-  <div class="rounded-2 border p-4 mt-4">
-    <h5>Has <%= pluralize(@user.rentals.count, 'active rental') %></h5>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <% @user.rentals.reverse_each do |rental| %>
-        <div class="col col-md-6 col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= rental.product.title %></h5>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<hr class="my-5">
+
+<div class="m-2">
+  <% active = @user.rentals.where(status: :active) %>
+  <% done = @user.rentals.where(status: :done) %>
+  <% if active.count > 0 %>
+    <div class="rounded-2 border p-4 mt-4">
+      <h5>Has <%= pluralize(active.count, 'active rental') %></h5>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <% active.reverse_each do |rental| %>
+          <%=  render "rentals/rental", rental: rental %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+
+  <% if done.count > 0 %>
+    <div class="rounded-2 border p-4 mt-4">
+      <h5>Has <%= pluralize(done.count, 'done rental') %></h5>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <% done.reverse_each do |rental| %>
+          <%=  render "rentals/rental", rental: rental %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <% if current_user == @user %>
   <script type="text/javascript" charset="utf-8">
