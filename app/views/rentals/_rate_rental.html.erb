@@ -3,7 +3,7 @@
   <h6 class="mt-3">How would you rate your stay?</h6>
 
   <div class="d-flex flex-row justify-content-center mt-4">
-    <%= button_to dislike_path(rental), method: :post, hidden:true do %>
+    <%= button_to dislike_path(rental.product), method: :post, hidden:true do %>
       <button type="submit" class="btn btn-danger mx-3" data-bs-toggle="modal" data-bs-target="#modal">
       <span class="material-icons">
         thumb_down
@@ -11,7 +11,7 @@
       </button>
     <% end %>
 
-    <%= button_to like_path(rental), method: :post, hidden:true do %>
+    <%= button_to like_path(rental.product), method: :post, hidden:true do %>
       <button type="submit" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modal">
       <span class="material-icons">
         thumb_up

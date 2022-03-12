@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_12_124420) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_12_133007) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -61,19 +61,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_124420) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "rental_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rental_id"], name: "index_dislikes_on_rental_id"
+    t.index ["product_id"], name: "index_dislikes_on_product_id"
     t.index ["user_id"], name: "index_dislikes_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "rental_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rental_id"], name: "index_likes_on_rental_id"
+    t.index ["product_id"], name: "index_likes_on_product_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -120,9 +120,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_124420) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
-  add_foreign_key "dislikes", "rentals"
+  add_foreign_key "dislikes", "products"
   add_foreign_key "dislikes", "users"
-  add_foreign_key "likes", "rentals"
+  add_foreign_key "likes", "products"
   add_foreign_key "likes", "users"
   add_foreign_key "products", "users"
   add_foreign_key "rentals", "products"

@@ -1,15 +1,58 @@
 
 
-<div class="" id="<%= dom_id product %>">
+<div class="card border-0" id="<%= dom_id product %>">
   <div class="d-flex justify-content-center">
       <%= image_tag product.image, class:"w-50" %>
+    <li class="dropdown position-absolute top-0 end-0 mt-1" style="list-style-type: none;">
+      <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+        <span class="material-icons" style="color:black;">more_vert</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end me-1">
+        <% if user_signed_in? %>
+          <!-- Edit story button -->
+          <% if current_user.id == product.user_id %>
+            <li>
+              <%= link_to "Edit listing", edit_product_path(product), class: "dropdown-item" %>
+            </li>
+          <% end %>
+
+          <li><%= %></li>
+
+        <% else %>
+          <li class="dropdown-item">Legg til i spilleliste</li>
+        <% end %>
+      </ul>
+    </li>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= product.title %></h5>
-    <p class="card-subtitle text-muted mt-3">This listing is currently being rented</p>
-    <h6 class="card-subtitle mt-3"><%= product.address %></h6>
-    <p class="card-text mt-3"><%= product.content %></p>
-    <p class="card-text mt-3">Listed by <%= link_to product.user.first_name + " " + product.user.last_name, profile_path(product.user) %></p>
+    <div class="row">
+      <div class="col-8">
+        <h5 class="card-title"><%= product.title %></h5>
+        <p class="card-subtitle text-muted mt-3" hidden>This listing is currently being rented</p>
+        <h6 class="card-subtitle mt-3"><%= product.address %></h6>
+        <p class="card-text mt-3"><%= product.content %></p>
+        <p class="card-text mt-3">Listed by <%= link_to product.user.first_name + " " + product.user.last_name, profile_path(product.user) %></p>
+      </div>
 
+      <div class="col-4">
+        <h5>This listing has been rented <%= pluralize product.rentals.count, 'time' %></h5>
+
+        <div class="d-flex flex-row g-2 mt-3">
+          <div class="d-flex flex-col">
+            <div class="text-center">
+              <span class="material-icons px-2 py-1 rounded bg-success mx-2" style="color:white">thumb_up</span>
+              <p class="card-text mt-3"><%= product.likes.count %></p>
+            </div>
+
+            <div class="d-flex flex-col">
+              <div class="text-center">
+                <span class="material-icons px-2 py-1 rounded bg-danger mx-2" style="color:white">thumb_down</span>
+                <p class="card-text mt-3"><%= product.dislikes.count %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -3,8 +3,8 @@ class LikeController < ApplicationController
 
 
   def create
-    rental = Rental.find(params[:rental_id])
-    @like = rental.likes.build
+    product = Product.find(params[:product_id])
+    @like = product.likes.build
     @like.user = current_user
     @like.save
   end

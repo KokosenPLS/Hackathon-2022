@@ -2,8 +2,8 @@
 
 one:
   user: one
-  rental: one
+  product: one
 
 two:
   user: two
-  rental: two
+  product: two

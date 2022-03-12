@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many :comments
   belongs_to :user
   has_many :rentals
+  has_many :likes
+  has_many :dislikes
 
   validate :acceptable_image
   after_commit :add_default_cover, on: [:create, :update]
