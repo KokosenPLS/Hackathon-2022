@@ -4,11 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :comments
-  has_many :products
-  has_many :rentals
-  has_many :likes
-  has_many :dislikes
+  has_many :comments, dependent: :destroy
+  has_many :products, dependent: :destroy
+  has_many :rentals, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :dislikes, dependent: :destroy
 
   def full_name
     first_name + " " + last_name

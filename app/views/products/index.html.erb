@@ -8,12 +8,15 @@
     <div class="card my-2 my-md-4" id="<%= dom_id product %>" >
       <div class="row g-0">
         <div class="col-md-4">
-            <%= image_tag product.image, class:"img-fluid" %>
+            <%= image_tag product.image, class:"img-fluid rounded-start h-100" %>
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title"><%= product.title %></h5>
-            <p class="card-text"><%= product.content %></p>
+            <p class="card-text"><%= product.content.truncate(180) %></p>
+            <p class="card-subtitle text-muted mt-3">Costs $<%= product.price %> a day</p>
+            <p class="card-text mt-1"><h6 class="mt-1"><%= link_to product.user.full_name, profile_path(product.user), class:"no-link" %></h6></p>
+            <p class="text-muted">This listing has been rented <%= pluralize product.rentals.count, 'time' %></p>
             <%= link_to "Show this listing", product, class:"btn btn-primary" %>
             <p class="card-text mt-4"><small class="text-muted">Uploaded <%= time_ago_in_words product.created_at %> ago</small></p>
           </div>

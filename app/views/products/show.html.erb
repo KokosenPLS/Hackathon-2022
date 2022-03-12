@@ -10,7 +10,7 @@
     <%= button_to "Add a comment", new_comment_path(product_id: @product), class:"btn btn-primary", method: :post%>
   </div>
 
-  <h5 class="my-3">Comments</h5>
+  <h5 class="my-3">Comments (<%= @product.comments.count %>)</h5>
 
   <div id="comments">
     <% @product.comments.reverse_each do |comment|%>

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post "like/:product_id", to: "like#create", as: "like"
   post "dislike/:product_id", to: "dislike#create", as: "dislike"
 
+  get "home", to: "home#index", as: "home"
+
   # Defines the root path route ("/")
   root "products#index"
 end

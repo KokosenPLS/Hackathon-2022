@@ -1,31 +1,25 @@
 class Product < ApplicationRecord
 
-  has_one_attached :image
-  has_many :comments
+  has_one_attached :image, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :user
-  has_many :rentals
-  has_many :likes
-  has_many :dislikes
+  has_many :rentals, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :dislikes, dependent: :destroy
 
   validate :acceptable_image
-  after_commit :add_default_cover, on: [:create, :update]
 
 
   def acceptable_image
+    Rails.logger.debug "Sjekker om det er attached"
     if image.attached?
-      acceptable_types = ["image/jpeg", "image/png"]
+      Rails.logger.debug "Bildet er attached"
+      acceptable_types = ["image/jpeg", "image/jpg", "image/png"]
 
       unless acceptable_types.include?(image.content_type)
         errors.add(:main_image, "must be a JPEG or PNG")
       end
-
-    end
-  end
-
-  private
-
-  def add_default_cover
-    unless image.attached?
+    else
       self.image.attach(io: File.open(Rails.root.join("app", "assets", "images", "default.png")), filename: 'default.png' , content_type: "image/png  ")
     end
   end
