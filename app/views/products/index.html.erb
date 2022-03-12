@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Products</h1>
+<h1>Available listings</h1>
 
 <div id="products">
   <% @products.each do |product| %>
@@ -15,7 +15,7 @@
             <h5 class="card-title"><%= product.title %></h5>
             <p class="card-text"><%= product.content %></p>
             <%= link_to "Show this product", product, class:"btn btn-primary" %>
-            <p class="card-text mt-4"><small class="text-muted">Uploaded <%= time_ago_in_words product.created_at %></small></p>
+            <p class="card-text mt-4"><small class="text-muted">Uploaded <%= time_ago_in_words product.created_at %> ago</small></p>
           </div>
         </div>
       </div>
@@ -23,6 +23,6 @@
   <% end %>
 </div>
 
-<%= link_to "New product", new_product_path %>
-
-
+<script>
+  document.getElementById("nav_listings").classList.add("active")
+</script>

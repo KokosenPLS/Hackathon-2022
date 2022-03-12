@@ -1,11 +1,15 @@
 
 
-<div class="card" id="<%= dom_id product %>">
+<div class="" id="<%= dom_id product %>">
   <div class="d-flex justify-content-center">
       <%= image_tag product.image, class:"w-50" %>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%= product.title %></h5>
-    <p class="card-text"><%= product.content %></p>
+    <p class="card-subtitle text-muted mt-3">This listing is currently being rented</p>
+    <h6 class="card-subtitle mt-3"><%= product.address %></h6>
+    <p class="card-text mt-3"><%= product.content %></p>
+    <p class="card-text mt-3">Listed by <%= link_to product.user.first_name + " " + product.user.last_name, profile_path(product.user) %></p>
+
   </div>
 </div>

@@ -2,15 +2,15 @@
 
 <%= render @product %>
 
-<div>
-  <%= link_to "Back to products", products_path, class:"btn btn-secondary my-2" %>
-</div>
+<%= link_to "Rent this hut", new_rental_path(product_id: @product), class:"btn btn-success" %>
 
-<div class="border container-fluid p-2 p-md-4">
-  <h5>Comments</h5>
+<hr>
+<div class="container-fluid p-2 p-md-4">
   <div id="btn_add_comment">
     <%= button_to "Add a comment", new_comment_path(product_id: @product), class:"btn btn-primary", method: :post%>
   </div>
+
+  <h5 class="my-3">Comments</h5>
 
   <div id="comments">
     <% @product.comments.reverse_each do |comment|%>

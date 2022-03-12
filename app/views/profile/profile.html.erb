@@ -1,0 +1,42 @@
+<h2><%= @user.first_name + " " + @user.last_name %></h2>
+
+<% if @user.products.count > 0 %>
+<div class="rounded-2 border p-4 mt-4">
+  <h5>Has <%= pluralize(@user.products.count, 'listing') %></h5>
+  <div class="row">
+    <% @user.products.reverse_each do |product| %>
+    <div class="col col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= product.title %></h5>
+          <p class="card-text"><%= product.content %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<% if @user.rentals.count > 0 %>
+  <div class="rounded-2 border p-4 mt-4">
+    <h5>Has <%= pluralize(@user.rentals.count, 'active rental') %></h5>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @user.rentals.reverse_each do |rental| %>
+        <div class="col col-md-6 col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= rental.product.title %></h5>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if current_user == @user %>
+  <script type="text/javascript" charset="utf-8">
+      document.getElementById("nav_my_profile").classList.add("active")
+  </script>
+<% end %>

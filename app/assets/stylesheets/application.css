@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+
+.navbar-nav  button {
+     border: none;
+     background-color: transparent;
+     color: #b23b3b;
+     padding-left: 0;
+ }
+.no-button{
+    display: inline;
+}
+
+.display-product > p {
+    margin-top: 1rem;
+}

@@ -12,19 +12,28 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, style: "display: block", class:"mt-4" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.label :address, style: "display: block", class:"mt-4" %>
+    <%= form.text_field :address, class: "form-control" %>
   </div>
 
-  <%= form.label :image %>
-  <%= form.file_field :image %>
+  <div>
+    <%= form.number_field :user_id, id: :story_user_id, value: current_user.id, type: :hidden %>
+  </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :content, style: "display: block", class:"mt-4" %>
+    <%= form.text_area :content, class: "form-control" %>
+  </div>
+
+  <%= form.label :image, class:"mt-4" %>
+  <%= form.file_field :image, class: "form-control" %>
+
+  <div>
+    <%= form.submit class:"btn btn-success mt-4" %>
   </div>
 <% end %>
